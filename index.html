@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- <meta name="description"
+        content="Lift3D: use NeRF to create training data."> -->
+  <meta name="keywords" content="NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SyntheOcc: Synthesize Geometric Controlled Street View Images through 3D Semantic MPIs</title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/UST.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+  
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">SyntheOcc: Synthesize Geometric Controlled Street View Images through 3D Semantic MPIs</h1>
+          <div class="is-size-5 publication-authors">
+
+            <span class="author-block">
+              <a href="https://len-li.github.io/">Leheng Li</a><sup>1</sup>,</span>
+
+              <a href="https://weichaoqiu.com/" target="_blank">Weichao Qiu</a><sup>3</sup>, 
+
+              <a href="https://yjcaimeow.github.io/" target="_blank">Yingjie Cai</a><sup>3</sup>, 
+
+              <a href="https://yanx27.github.io/" target="_blank">Xu Yan</a><sup>3</sup>, 
+
+              <a href="https://scholar.google.com/citations?user=-3R0Cr0AAAAJ&hl=en" target="_blank">Qing Lian</a><sup>2</sup>, 
+
+              <a href="https://scholar.google.com/citations?user=-rCulKwAAAAJ&hl=en" target="_blank">Bingbing Liu</a><sup>3</sup>, 
+
+
+            <span class="author-block">
+              <a href="https://www.yingcong.me/">Ying-Cong Chen</a><sup>1,2</sup>
+
+
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>HKUST(GZ),</span>
+            <span class="author-block"><sup>2</sup>HKUST,</span> 
+            <span class="author-block"><sup>3</sup>HUAWEI Noah's Ark Lab</span> 
+            <p><span class="author-block">arxiv preprint</span></p>
+          </div>
+
+
+            1,2<img src="./imgs/UST.svg" class="center" width="50px">
+            3<img src="./imgs/hw.png" class="center" width="80px">
+
+
+           <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2309.01351"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- <span class="link-block">
+                <a href="https://len-li.github.io/assets/pdf/lift3d_supp.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Supp.</span>
+                </a>
+              </span> -->
+
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/Len-Li/Adv3D"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+            </div> 
+          </div> 
+        </div> 
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="hero">
+  <div class="container is-max-desktop">
+    <!-- <div class="hero-body"> -->
+      <img src="./imgs/main.jpg" class="center" width="800px">
+      <h2 class="subtitle has-text-centered">
+        Generate multi-view images with voxel guidance.
+      </h2>
+    <!-- </div> -->
+  </div>
+</section>
+
+<br>
+
+
+<section class="flex">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            The advancement of autonomous driving is increasingly reliant on high-quality annotated datasets, especially in the task of 3D occupancy prediction, where the occupancy labels require dense 3D annotation with significant human effort. In this paper, we propose SyntheOcc, which denotes a diffusion model that Synthesize photorealistic and geometric controllable images by conditioning Occupancy labels in driving scenarios. This yields an unlimited amount of diverse, annotated, and controllable datasets for applications like training perception models and simulation. 
+
+          </p>
+          <p>
+            SyntheOcc addresses the critical challenge of how to efficiently encode 3D geometric information as conditional input to a 2D diffusion model. Our approach innovatively incorporates 3D semantic multi-plane images (MPIs) to provide comprehensive and spatially aligned 3D scene descriptions for conditioning. By doing so, SyntheOcc can generate photorealistic multi-view images and videos that faithfully align with the given geometric labels (semantics in 3D voxel space). Extensive qualitative and quantitative evaluations of SyntheOcc on the nuScenes dataset prove its effectiveness in generating controllable occupancy datasets that serve as an effective data augmentation to perception models.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Method. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Method</h2>
+        <img src="./static/adv3d_pipeline.png" class="center" width="800px">
+        <div class="content has-text-justified">
+          <p>
+            Adv3D aims to generate 3D adversarial examples that consistently perform attacks under
+            different poses during rendering. We initialize adversarial examples from Lift3D. During
+            training, we optimize the texture latent codes of NeRF to minimize the detection confidence of
+            all surrounding objects. During inference, we evaluate the performance reduction of pasting the
+            adversarial patch rendered using randomly sampled poses on the validation set.
+          </p>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Method. -->
+
+  </div>
+
+</section>
+
+<br>
+
+
+
+<div class="columns is-centered has-text-centered">
+  <div class="column is-four-fifths">
+    <h2 class="title is-4">Method</h2>
+    <img src="./imgs/mpi.jpg" class="center" width="700px">
+    <div class="columns is-centered has-text-centered">
+      <p>
+          We use 3D semantic MPI to represent the irregular occupancy conditions.
+        </p>
+    </div>
+  </div>
+</div>
+
+<br>
+
+
+<div class="columns is-centered has-text-centered">
+  <div class="column is-four-fifths">
+    <h2 class="title is-4">Applications</h2>
+    <!-- <img src="./imgs/fog.jpg" class="center" width="1000px"> -->
+
+
+
+    <div style="overflow:hidden;">
+      <div class="container">
+          <div id="post_images" class="carousel">
+    
+            <div class="item columns is-centered">
+              <div class="item-1">
+                <img src="./imgs/fog.jpg" class="center" width="900px">
+              </div>
+            </div>
+    
+    
+            <div class="item columns is-centered">
+              <div class="item-2">
+                <img src="./imgs/test1.jpg" class="center" width="900px">
+              </div>
+            </div>
+    
+          </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/js/bulma-carousel.min.js"></script>
+    <script>
+    bulmaCarousel.attach('#post_images', {
+          slidesToScroll: 1,
+          slidesToShow: 1,
+          loop: true,
+    });
+    </script>
+    </div>
+    </div>
+    
+    <br>
+
+
+    <div class="columns is-centered has-text-centered">
+      <p>
+          Use our synthetic data for downstream evaluations.
+        </p>
+    </div>
+
+    <!-- <img src="./imgs/exp.jpg" class="center" width="1000px"> -->
+
+
+    <div class="content has-text-justified">
+    </div>
+  </div>
+</div>
+
+
+
+<div class="columns is-centered has-text-centered">
+  <div class="column is-four-fifths">
+    <h2 class="title is-4">Results</h2>
+    <img src="./imgs/compare.jpg" class="center" width="900px">
+
+
+
+    <div class="columns is-centered has-text-centered">
+      <p>
+          Comparison with baselines.
+        </p>
+    </div>
+
+
+    <img src="./imgs/exp.jpg" class="center" width="900px">
+    <div class="content has-text-justified">
+    </div>
+  </div>
+</div>
+
+<br>
+
+
+
+
+<div class="columns is-centered has-text-centered">
+  <div class="column is-four-fifths">
+<h2 class="title is-4">Generation with weather variation</h2>
+
+<div style="overflow:hidden;">
+  <div class="container">
+      <div id="post_images" class="carousel">
+
+        <div class="item columns is-centered">
+          <div class="item-1">
+            <img src="./imgs/weather/000250_7.jpg" class="center" width="800px">
+          </div>
+        </div>
+
+
+        <div class="item columns is-centered">
+          <div class="item-2">
+            <img src="./imgs/weather/000258_7.jpg" class="center" width="800px">
+          </div>
+        </div>
+
+        <div class="item columns is-centered">
+          <div class="item-3">
+            <img src="./imgs/weather/000266_7.jpg" class="center" width="800px">
+          </div>
+        </div>
+
+
+      </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/js/bulma-carousel.min.js"></script>
+<script>
+bulmaCarousel.attach('#post_images', {
+      slidesToScroll: 1,
+      slidesToShow: 1,
+      loop: true,
+});
+</script>
+</div>
+</div>
+
+
+
+<br>
+
+
+<!-- Re-rendering. -->
+
+
+<div class="columns is-centered has-text-centered">
+  <div class="column is-four-fifths">
+<h2 class="title is-4">Illustration Video</h2>
+<div class="content has-text-centered">
+  <video id="replay-video"
+          controls
+          muted
+          preload
+          playsinline
+          width="75%">
+    <source src="./adv3d.mp4"
+            type="video/mp4">
+  </video>
+</div>
+<!--/ Re-rendering. -->
+
+
+
+	
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{li2023adv3d, 
+	author = {Leheng Li and Qing Lian and Ying-Cong Chen}, 
+	title = {Adv3D: Generating 3D Adversarial Examples in Driving Scenarios with NeRF}, 
+        journal={arXiv preprint},
+	year = {2023}, 
+}</code></pre>
+  </div>
+</section>
+
+  
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link" href="https://github.com/Len-Li" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p style="text-align:center">
+            Web source code mainly borrowed from <a href="https://keunhong.com/">Keunhong Park</a>'s <a
+              href="https://nerfies.github.io/">Nerfies website</a>.
+          </p>
+          <p style="text-align:center">
+            Please contact <a href="https://len-li.github.io/">Leheng Li</a> if you have feedback or questions for this project.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
